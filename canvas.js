@@ -24,3 +24,12 @@ c.beginPath();
 c.arc(600, 250, 100, 0, Math.PI * 2, false);
 c.strokeStyle = "blue";
 c.stroke();
+
+for (var i = 0; i < 5; i++) {
+  var x = Math.random() * window.innerWidth;
+  var y = Math.random() * window.innerHeight;
+  c.beginPath();
+  c.arc(x, y, 30, 0, Math.PI * 2, false);
+  c.strokeStyle = "red";
+  c.stroke();
+}
