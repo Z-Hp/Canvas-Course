@@ -38,6 +38,23 @@ var c = canvas.getContext("2d");
 // }
 
 // ----------------------------------------------------------------------------------------------------------
+// ------------------------------------  Create Interactive feature --------------------------------------------
+// ----------------------------------------------------------------------------------------------------------
+var mouse = {
+  x: undefined,
+  y: undefined,
+};
+var minRadius = 5;
+var maxRadius = 40;
+
+var neighborhoodRange = 50;
+
+window.addEventListener("mousemove", function (event) {
+  mouse.x = event.x;
+  mouse.y = event.y;
+});
+
+// ----------------------------------------------------------------------------------------------------------
 // ------------------------------------ Create javaScript Object --------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
 function Circle(x, y, radius, dx, dy) {
@@ -52,6 +69,7 @@ function Circle(x, y, radius, dx, dy) {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.strokeStyle = "blue";
     c.stroke();
+    c.fill();
   };
 
   this.update = function () {
@@ -64,6 +82,21 @@ function Circle(x, y, radius, dx, dy) {
 
     this.x += this.dx;
     this.y += this.dy;
+
+    // interactivity
+    if (
+      // Note: (mouse.x - this.x) is distance between the mouse pointer and the x coordinate of each circle
+      mouse.x - this.x < neighborhoodRange &&
+      mouse.x - this.x > -neighborhoodRange &&
+      mouse.y - this.y < neighborhoodRange &&
+      mouse.y - this.y > -neighborhoodRange
+    ) {
+      if (this.radius < maxRadius) {
+        this.radius += 1;
+      }
+    } else if (this.radius > minRadius) {
+      this.radius -= 1;
+    }
 
     this.draw();
   };
