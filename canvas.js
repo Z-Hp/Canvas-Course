@@ -1,6 +1,9 @@
 var canvas = document.querySelector("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+
+canvas.width = 800;
+canvas.height = 500;
 
 var c = canvas.getContext("2d");
 
@@ -55,7 +58,15 @@ function animate() {
   c.strokeStyle = "blue";
   c.stroke();
 
+  if (x + radius > canvas.width || x - radius < 0) {
+    dx = -dx;
+  }
+  if (y + radius > canvas.height || y - radius < 0) {
+    dy = -dy;
+  }
+
   x += dx;
+  y += dy;
 }
 
 animate();
