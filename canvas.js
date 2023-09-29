@@ -44,10 +44,12 @@ var mouse = {
   x: undefined,
   y: undefined,
 };
-var minRadius = 5;
+var minRadius = 2;
 var maxRadius = 40;
 
 var neighborhoodRange = 50;
+
+var colorArray = ["#F20F79", "#04BFBF", "#F2B90C", "#8C4E03", "#F25C05"];
 
 window.addEventListener("mousemove", function (event) {
   mouse.x = event.x;
@@ -63,12 +65,12 @@ function Circle(x, y, radius, dx, dy) {
   this.y = y;
   this.dx = dx;
   this.dy = dy;
+  this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
   this.draw = function () {
     c.beginPath();
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.strokeStyle = "blue";
-    c.stroke();
+    c.fillStyle = this.color;
     c.fill();
   };
 
@@ -104,13 +106,13 @@ function Circle(x, y, radius, dx, dy) {
 // ---------------------------------------------- Create 100 Circles ----------------------------------------------------------
 
 var circleArray = [];
-for (var i = 0; i < 100; i++) {
+for (var i = 0; i < 1000; i++) {
   var radius = 30;
-  var x = Math.random() * (innerWidth - 2 * radius) + radius;
-  var y = Math.random() * (innerHeight - 2 * radius) + radius;
-  // For dx and dy: By -0.5 we can have both positive and negative velocity & 3 is a factor to amplify the speed.
-  var dx = (Math.random() - 0.5) * 3;
-  var dy = (Math.random() - 0.5) * 3;
+  var x = Math.random() * (innerWidth - radius * 2) + radius;
+  var y = Math.random() * (innerHeight - radius * 2) + radius;
+  // For dx and dy: By -0.5 we can have both positive and negative velocity & 10 is a factor to amplify the speed.
+  var dx = (Math.random() - 0.5) * 1;
+  var dy = (Math.random() - 0.5) * 1;
 
   circleArray.push(new Circle(x, y, radius, dx, dy));
 }
