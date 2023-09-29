@@ -72,12 +72,12 @@ function Circle(x, y, radius, dx, dy) {
 
 var circleArray = [];
 for (var i = 0; i < 100; i++) {
-  var x = Math.random() * innerWidth;
-  var y = Math.random() * innerHeight;
+  var radius = 30;
+  var x = Math.random() * (innerWidth - 2 * radius) + radius;
+  var y = Math.random() * (innerHeight - 2 * radius) + radius;
   // For dx and dy: By -0.5 we can have both positive and negative velocity & 3 is a factor to amplify the speed.
   var dx = (Math.random() - 0.5) * 3;
   var dy = (Math.random() - 0.5) * 3;
-  var radius = 30;
 
   circleArray.push(new Circle(x, y, radius, dx, dy));
 }
