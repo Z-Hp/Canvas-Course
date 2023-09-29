@@ -44,7 +44,7 @@ var mouse = {
   x: undefined,
   y: undefined,
 };
-var minRadius = 2;
+// var minRadius = 2;
 var maxRadius = 40;
 
 var neighborhoodRange = 50;
@@ -61,6 +61,7 @@ window.addEventListener("mousemove", function (event) {
 // ----------------------------------------------------------------------------------------------------------
 function Circle(x, y, radius, dx, dy) {
   this.radius = radius;
+  this.minRadius = radius;
   this.x = x;
   this.y = y;
   this.dx = dx;
@@ -96,7 +97,7 @@ function Circle(x, y, radius, dx, dy) {
       if (this.radius < maxRadius) {
         this.radius += 1;
       }
-    } else if (this.radius > minRadius) {
+    } else if (this.radius > this.minRadius) {
       this.radius -= 1;
     }
 
@@ -107,7 +108,7 @@ function Circle(x, y, radius, dx, dy) {
 
 var circleArray = [];
 for (var i = 0; i < 1000; i++) {
-  var radius = 30;
+  var radius = Math.random() * 3 + 1;
   var x = Math.random() * (innerWidth - radius * 2) + radius;
   var y = Math.random() * (innerHeight - radius * 2) + radius;
   // For dx and dy: By -0.5 we can have both positive and negative velocity & 10 is a factor to amplify the speed.
