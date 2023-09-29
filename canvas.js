@@ -56,6 +56,14 @@ window.addEventListener("mousemove", function (event) {
   mouse.y = event.y;
 });
 
+// Making the canvas responsive to the browser
+window.addEventListener("resize", function () {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  init();
+});
+
 // ----------------------------------------------------------------------------------------------------------
 // ------------------------------------ Create javaScript Object --------------------------------------------
 // ----------------------------------------------------------------------------------------------------------
@@ -105,19 +113,21 @@ function Circle(x, y, radius, dx, dy) {
   };
 }
 // ---------------------------------------------- Create 100 Circles ----------------------------------------------------------
-
 var circleArray = [];
-for (var i = 0; i < 1000; i++) {
-  var radius = Math.random() * 3 + 1;
-  var x = Math.random() * (innerWidth - radius * 2) + radius;
-  var y = Math.random() * (innerHeight - radius * 2) + radius;
-  // For dx and dy: By -0.5 we can have both positive and negative velocity & 10 is a factor to amplify the speed.
-  var dx = (Math.random() - 0.5) * 1;
-  var dy = (Math.random() - 0.5) * 1;
 
-  circleArray.push(new Circle(x, y, radius, dx, dy));
+function init() {
+  circleArray = [];
+  for (var i = 0; i < 1000; i++) {
+    var radius = Math.random() * 3 + 1;
+    var x = Math.random() * (innerWidth - radius * 2) + radius;
+    var y = Math.random() * (innerHeight - radius * 2) + radius;
+    // For dx and dy: By -0.5 we can have both positive and negative velocity & 10 is a factor to amplify the speed.
+    var dx = (Math.random() - 0.5) * 1;
+    var dy = (Math.random() - 0.5) * 1;
+
+    circleArray.push(new Circle(x, y, radius, dx, dy));
+  }
 }
-
 // ------------------------------------ Animate all the circles we create previously -----------------------------------------
 
 function animate() {
@@ -129,5 +139,6 @@ function animate() {
   }
 }
 
+init();
 animate();
 // --------------------------------------------------------------------------------------------------------------------------
